@@ -19,6 +19,29 @@
 })();
 
 (function(){
+    self.Bar = function(x,y,width,height,board){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.board = board;
+        this.board.bars.push(this);
+        this.kind = "rectangle";
+        
+
+    }
+    self.Bar.prototype ={
+        down: function(){
+            
+        },
+        up: function(){
+            
+
+        },
+    }
+})();
+
+(function(){
     self.BoardView = function (canvas,board){
         this.canvas= canvas;
         this.canvas.width = board.width;
