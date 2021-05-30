@@ -51,6 +51,11 @@
     }
 
     self.BoardView.prototype = {
+        clean: function(){
+            this.ctx.clearRect(0,0,this.board.width,this.board.height)
+        },
+
+
         draw: function(){
             for(var i = this.board.elements.length-1; i>=0; i--){
                 var el = this.board.elements[i];   
@@ -58,6 +63,8 @@
             };
         }
     }
+
+
 
     function draw (ctx, element){
         switch (element.kind){
@@ -76,23 +83,34 @@
     var bar = new Bar(20,100,40,100,board);
     var bar = new Bar(735,100,40,100,board);
 
+    window.requestAnimationFrame(controller);
 
-document.addEventListener("keydown", function (ev){
-    if(ev.keyCode == 38){
-        ev.preventDefault();
-        bar2.up();
-    }else if (ev.keyCode == 40){
-        ev.preventDefault();
-        bar2.down();
-    } 
-});
+    document.addEventListener("keydown", function (ev){
+        if(ev.keyCode == 38){
+            ev.preventDefault();
+            bar2.up();
+        }else if (ev.keyCode == 40){
+            ev.preventDefault();
+            bar2.down();
+        }else if(ev.keyCode == 87){
+            ev.preventDefault();
+            bar.up();
+        }else if (ev.keyCode == 83){
+            ev.preventDefault();
+            bar.down();
+        }else if (ev.keyCode == 32){
+            ev.preventDefault();
+            board.playing= !board.playing;
+        } 
+    });
 
 
-self.addEventListener("load", main);
+//self.addEventListener("load", main);
 
-function main(){
+function controller(){
     
-
+    window.requestAnimationFrame(controller);
     board_view.draw();
+    board_view.clean();
     
 }
